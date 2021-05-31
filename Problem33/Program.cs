@@ -8,7 +8,7 @@ namespace Problem33
 {
     class Program
     {
-        public static int sampleSize = 1000;
+        public static int sampleSize = 100000000;
         public static int[] nums = new int[sampleSize];
 
         static void Main(string[] args)
@@ -20,6 +20,8 @@ namespace Problem33
             IndividualNumberQuantity(nums);
 
             DetectCycle(nums);
+
+            //FindCycle(nums, 0);
 
             Console.ReadKey();
         }
@@ -64,13 +66,20 @@ namespace Problem33
             Console.WriteLine("Average number quanity: " + (float)quantities.Sum() / (float)quantities.Count());
         }
 
+        static void FindCycle(int[] nums, int seed) // Nums must be stored without bit shift
+        {
+            Console.WriteLine($"Second cycle starts at index position; {nums.ToList().IndexOf(seed)}");
+        }
+
         static void DetectCycle(int[] nums) // Only works if seed = 0
         {
-            for (int i = 0; i < nums.Count(); i++)
+            int temp = 0;
+            for (int i = 0; i < 65545; i++)
             {
-                int temp = 0;
                 if (nums[i] == nums[0])
                 {
+                    Console.WriteLine(temp);
+                    Console.WriteLine(i);
                     if (i - temp == 4)
                     {
                         if (i > 4)
@@ -81,7 +90,6 @@ namespace Problem33
                     temp = i;
                 }
             }
-            Console.WriteLine("No cycle detected");
         }
     }
 }
